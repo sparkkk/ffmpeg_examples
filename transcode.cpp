@@ -65,7 +65,7 @@ int run(const std::string & in_path, const std::string & out_path)
     av_dict_set(&codec_options, "preset", "fast", 0);
     //not know why but if x264 mode was not crf (by default it is arf), 
     //the output video might start with some grey frames.
-    //Maybe the encoded first frame was not key-frame at that time.
+    //the first frame of encoded video being key-frame and I-pic ensured.
     av_dict_set(&codec_options, "x264opts", "crf=23", 0);
     av_result = avcodec_open2(codec_ctx_output, NULL, &codec_options);
     if (av_result != 0) {
