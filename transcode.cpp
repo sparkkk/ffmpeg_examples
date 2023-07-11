@@ -128,17 +128,6 @@ int run(const std::string & in_path, const std::string & out_path)
                 break;
             } else {
                 av_result = av_frame_copy(frame_out, frame_in);
-                if (frame_in->nb_side_data > 0) {
-                    AVFrameSideData * side_data = av_frame_get_side_data(
-                        frame_in, 
-                        AVFrameSideDataType::AV_FRAME_DATA_SEI_UNREGISTERED
-                    );
-                    av_frame_new_side_data_from_buf(
-                        frame_out,
-                        AVFrameSideDataType::AV_FRAME_DATA_SEI_UNREGISTERED,
-                        side_data->buf
-                    );
-                }
                 frame_out->pts = frame_in->pts;
                 //scale frame pts if time-bases are different between input and
                 //output codec context
